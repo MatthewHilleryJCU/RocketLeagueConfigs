@@ -1,1 +1,1 @@
-Camera Settings from https://prosettings.net/rocket-league-pro-camera-settings-controller-list/
+Camera Settings from https://liquipedia.net/rocketleague/List_of_player_camera_settings
