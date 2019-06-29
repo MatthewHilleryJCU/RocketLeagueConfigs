@@ -9,7 +9,7 @@ public class Player {
     private ControlSettings controlSettings;
     private CameraSettings cameraSettings;
 
-    public Player(ControlSettings controlSettings, CameraSettings cameraSettings, String name, int id) {
+    public Player() {
         this.controlSettings = controlSettings;
         this.cameraSettings = cameraSettings;
         this.name = name;
@@ -67,8 +67,8 @@ public class Player {
         return "Player{" +
                 "name='" + name + '\'' +
                 ", id=" + id +
-                ", controlSettings=" + controlSettings +
-                ", cameraSettings=" + cameraSettings +
+                ", controlSettings=" + controlSettings.toString() +
+                ", cameraSettings=" + cameraSettings.toString() +
                 '}';
     }
 }

@@ -5,15 +5,15 @@ import java.util.Objects;
 public class CameraSettings extends Settings {
 
     private boolean cameraShake;
-    private int fov;
-    private int distance;
-    private int height;
-    private int angle;
+    private long fov;
+    private long distance;
+    private long height;
+    private long angle;
     private double stiffness;
     private double swivel;
     private boolean ballCam;
 
-    public CameraSettings(boolean cameraShake, int fov, int distance, int height, int angle, double stiffness, double swivel, boolean ballcam) {
+    public CameraSettings(boolean cameraShake, long fov, long distance, long height, long angle, double stiffness, double swivel, boolean ballcam) {
         this.cameraShake = cameraShake;
         this.fov = fov;
         this.distance = distance;
@@ -32,7 +32,7 @@ public class CameraSettings extends Settings {
         this.cameraShake = cameraShake;
     }
 
-    public int getFov() {
+    public long getFov() {
         return fov;
     }
 
@@ -40,7 +40,7 @@ public class CameraSettings extends Settings {
         this.fov = fov;
     }
 
-    public int getDistance() {
+    public long getDistance() {
         return distance;
     }
 
@@ -48,7 +48,7 @@ public class CameraSettings extends Settings {
         this.distance = distance;
     }
 
-    public int getHeight() {
+    public long getHeight() {
         return height;
     }
 
@@ -56,7 +56,7 @@ public class CameraSettings extends Settings {
         this.height = height;
     }
 
-    public int getAngle() {
+    public long getAngle() {
         return angle;
     }
 
