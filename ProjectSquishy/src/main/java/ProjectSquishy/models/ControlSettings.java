@@ -1,29 +1,65 @@
-package ProjectSquishy;
+package ProjectSquishy.models;
 
+import javax.persistence.*;
 import java.util.Objects;
 
-public class ControlSettings extends Settings {
+@Entity
+@Table(name = "CONTROL_SETTINGS")
+public class ControlSettings implements Persistable <ControlSettings> {
 
+    @Id
+    @Column(name = "id")
+    private int id;
+
+    @Column(name = "POWER_SLIDE")
     private String powerSlide;
+
+    @Column(name = "AIR_ROLL")
     private String airRoll;
+
+    @Column(name = "AIR_ROLL_LEFT")
     private String airRollLeft;
+
+    @Column(name = "AIR_ROLL_RIGHT")
     private String airRollRight;
+
+    @Column(name = "BOOST")
     private String boost;
+
+    @Column(name = "JUMP")
     private String jump;
+
+    @Column(name = "BALL_CAM")
     private String ballCam;
+
+    @Column(name = "BRAKE")
     private String brake;
+
+    @Column(name = "THROTTLE")
     private String throttle;
 
-    public ControlSettings(String powerSlide, String airRoll, String airRollLeft, String airRollRight, String boost, String jump, String ballCam, String brake, String throttle) {
-        this.powerSlide = powerSlide;
-        this.airRoll = airRoll;
-        this.airRollLeft = airRollLeft;
-        this.airRollRight = airRollRight;
-        this.boost = boost;
-        this.jump = jump;
-        this.ballCam = ballCam;
-        this.brake = brake;
-        this.throttle = throttle;
+    @OneToOne(mappedBy = "controlSettings", cascade = CascadeType.ALL)
+    private Player player;
+
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void update(ControlSettings updateType) {
+        if (id == updateType.id){
+            powerSlide = updateType.powerSlide;
+            airRoll = updateType.airRoll;
+            airRollLeft = updateType.airRollLeft;
+            airRollRight = updateType.airRollRight;
+            boost = updateType.boost;
+            jump = updateType.jump;
+            ballCam = updateType.ballCam;
+            brake = updateType.brake;
+            throttle = updateType.throttle;
+        }
     }
 
     public String getPowerSlide() {
@@ -103,7 +139,8 @@ public class ControlSettings extends Settings {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ControlSettings that = (ControlSettings) o;
-        return Objects.equals(powerSlide, that.powerSlide) &&
+        return id == that.id &&
+                Objects.equals(powerSlide, that.powerSlide) &&
                 Objects.equals(airRoll, that.airRoll) &&
                 Objects.equals(airRollLeft, that.airRollLeft) &&
                 Objects.equals(airRollRight, that.airRollRight) &&
@@ -116,13 +153,14 @@ public class ControlSettings extends Settings {
 
     @Override
     public int hashCode() {
-        return Objects.hash(powerSlide, airRoll, airRollLeft, airRollRight, boost, jump, ballCam, brake, throttle);
+        return Objects.hash(id, powerSlide, airRoll, airRollLeft, airRollRight, boost, jump, ballCam, brake, throttle);
     }
 
     @Override
     public String toString() {
         return "ControlSettings{" +
-                "powerSlide='" + powerSlide + '\'' +
+                "controlSettingsId=" + id +
+                ", powerSlide='" + powerSlide + '\'' +
                 ", airRoll='" + airRoll + '\'' +
                 ", airRollLeft='" + airRollLeft + '\'' +
                 ", airRollRight='" + airRollRight + '\'' +

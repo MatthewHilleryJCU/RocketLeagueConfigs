@@ -1,5 +1,6 @@
 package ProjectSquishy;
 
+import ProjectSquishy.models.Player;
 import ProjectSquishy.utils.JsonMapper;
 import ProjectSquishy.utils.JsonReader;
 import org.json.simple.JSONObject;

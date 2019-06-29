@@ -1,8 +1,8 @@
 package ProjectSquishy.utils;
 
-import ProjectSquishy.CameraSettings;
-import ProjectSquishy.ControlSettings;
-import ProjectSquishy.Player;
+import ProjectSquishy.models.CameraSettings;
+import ProjectSquishy.models.ControlSettings;
+import ProjectSquishy.models.Player;
 import org.json.simple.JSONObject;
 
 public class JsonMapper {
