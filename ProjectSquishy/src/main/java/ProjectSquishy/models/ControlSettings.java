@@ -41,10 +41,24 @@ public class ControlSettings implements Persistable <ControlSettings> {
     @OneToOne(mappedBy = "controlSettings", cascade = CascadeType.ALL)
     private Player player;
 
+    public ControlSettings() {
+    }
 
     @Override
     public int getId() {
         return id;
+    }
+
+    public ControlSettings(String powerSlide, String airRoll, String airRollLeft, String airRollRight, String boost, String jump, String ballCam, String brake, String throttle) {
+        this.powerSlide = powerSlide;
+        this.airRoll = airRoll;
+        this.airRollLeft = airRollLeft;
+        this.airRollRight = airRollRight;
+        this.boost = boost;
+        this.jump = jump;
+        this.ballCam = ballCam;
+        this.brake = brake;
+        this.throttle = throttle;
     }
 
     @Override

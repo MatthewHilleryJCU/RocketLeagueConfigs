@@ -26,14 +26,20 @@ public class Player implements Persistable<Player> {
     @JoinColumn(name = "CAMERA_SETTINGS_ID")
     private CameraSettings cameraSettings;
 
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "DEADZONE_SETTINGS_ID")
+    private DeadzoneSettings deadzoneSettings;
+
 
     public Player() {
     }
 
-    public Player(String playerName, ControlSettings controlSettings, CameraSettings cameraSettings) {
+    public Player(String playerName, ControlSettings controlSettings, CameraSettings cameraSettings, DeadzoneSettings deadzoneSettings) {
         this.playerName = playerName;
         this.controlSettings = controlSettings;
         this.cameraSettings = cameraSettings;
+        this.deadzoneSettings = deadzoneSettings;
     }
 
     @Override
@@ -46,6 +52,7 @@ public class Player implements Persistable<Player> {
         if (id == updateType.id) {
             controlSettings = updateType.controlSettings;
             cameraSettings = updateType.cameraSettings;
+            deadzoneSettings = updateType.deadzoneSettings;
         }
     }
 
@@ -73,6 +80,14 @@ public class Player implements Persistable<Player> {
         this.cameraSettings = cameraSettings;
     }
 
+    public DeadzoneSettings getDeadzoneSettings() {
+        return deadzoneSettings;
+    }
+
+    public void setDeadzoneSettings(DeadzoneSettings deadzoneSettings) {
+        this.deadzoneSettings = deadzoneSettings;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -90,10 +105,11 @@ public class Player implements Persistable<Player> {
     @Override
     public String toString() {
         return "Player{" +
-                "playerId=" + id +
+                "id=" + id +
                 ", playerName='" + playerName + '\'' +
                 ", controlSettings=" + controlSettings.toString() +
                 ", cameraSettings=" + cameraSettings.toString() +
+                ", deadzoneSettings=" + deadzoneSettings.toString() +
                 '}';
     }
 }

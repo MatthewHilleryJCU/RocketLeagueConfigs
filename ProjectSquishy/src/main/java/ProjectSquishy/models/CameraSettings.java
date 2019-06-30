@@ -25,7 +25,7 @@ public class CameraSettings implements Persistable<CameraSettings> {
     private long height;
 
     @Column(name = "ANGLE")
-    private long angle;
+    private double angle;
 
     @Column(name = "STIFFNESS")
     private double stiffness;
@@ -43,6 +43,16 @@ public class CameraSettings implements Persistable<CameraSettings> {
     public CameraSettings() {
     }
 
+    public CameraSettings(boolean cameraShake, long fov, long distance, long height, long angle, double stiffness, double swivel, boolean ballCam) {
+        this.cameraShake = cameraShake;
+        this.fov = fov;
+        this.distance = distance;
+        this.height = height;
+        this.angle = angle;
+        this.stiffness = stiffness;
+        this.swivel = swivel;
+        this.ballCam = ballCam;
+    }
 
     @Override
     public int getId() {
@@ -95,11 +105,11 @@ public class CameraSettings implements Persistable<CameraSettings> {
         this.height = height;
     }
 
-    public long getAngle() {
+    public double getAngle() {
         return angle;
     }
 
-    public void setAngle(long angle) {
+    public void setAngle(Double angle) {
         this.angle = angle;
     }
 
