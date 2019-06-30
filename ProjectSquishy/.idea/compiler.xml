@@ -8,8 +8,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="FdmExercises" />
         <module name="JavaCourseExamples" />
+        <module name="JavaCourseExamples (1)" />
         <module name="ProjectSquishy" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ElevatorProject" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

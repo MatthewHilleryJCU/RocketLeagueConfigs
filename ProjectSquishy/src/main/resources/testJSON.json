@@ -1,0 +1,31 @@
+{
+"name": "Blake Oakfield",
+"team": "Mucca Mad Boys",
+"camera": 
+    {
+        "fov": 110,
+        "distance": 260,
+        "height": 100,
+        "angle": -3, 
+        "stiffness": 0.3,
+        "swivel": 4.7, 
+        "ballCam": true,
+        "cameraShake": false
+    },
+    
+"controls":
+    {
+        "powerSlide": "L1",
+        "airRoll": "L1",
+        "airRollLeft": null,
+        "airRollRight": "R1",
+        "boost": "circle",
+        "jump": "cross",
+        "ballCam": "triangle",
+        "brake": "L2",
+        "throttle": "R2"
+
+    }
+}
+
+    
