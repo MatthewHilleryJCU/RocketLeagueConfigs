@@ -17,11 +17,11 @@ public class ControlSettings implements Persistable <ControlSettings> {
     @Column(name = "AIR_ROLL")
     private String airRoll;
 
-    @Column(name = "AIR_ROLL_LEFT")
-    private String airRollLeft;
-
-    @Column(name = "AIR_ROLL_RIGHT")
-    private String airRollRight;
+//    @Column(name = "AIR_ROLL_LEFT")
+////    private String airRollLeft;
+////
+////    @Column(name = "AIR_ROLL_RIGHT")
+////    private String airRollRight;
 
     @Column(name = "BOOST")
     private String boost;
@@ -49,11 +49,13 @@ public class ControlSettings implements Persistable <ControlSettings> {
         return id;
     }
 
-    public ControlSettings(String powerSlide, String airRoll, String airRollLeft, String airRollRight, String boost, String jump, String ballCam, String brake, String throttle) {
+    public ControlSettings(String powerSlide, String airRoll,
+//                           String airRollLeft, String airRollRight,
+                           String boost, String jump, String ballCam, String brake, String throttle) {
         this.powerSlide = powerSlide;
         this.airRoll = airRoll;
-        this.airRollLeft = airRollLeft;
-        this.airRollRight = airRollRight;
+//        this.airRollLeft = airRollLeft;
+//        this.airRollRight = airRollRight;
         this.boost = boost;
         this.jump = jump;
         this.ballCam = ballCam;
@@ -66,8 +68,8 @@ public class ControlSettings implements Persistable <ControlSettings> {
         if (id == updateType.id){
             powerSlide = updateType.powerSlide;
             airRoll = updateType.airRoll;
-            airRollLeft = updateType.airRollLeft;
-            airRollRight = updateType.airRollRight;
+//            airRollLeft = updateType.airRollLeft;
+//            airRollRight = updateType.airRollRight;
             boost = updateType.boost;
             jump = updateType.jump;
             ballCam = updateType.ballCam;
@@ -92,21 +94,21 @@ public class ControlSettings implements Persistable <ControlSettings> {
         this.airRoll = airRoll;
     }
 
-    public String getAirRollLeft() {
-        return airRollLeft;
-    }
-
-    public void setAirRollLeft(String airRollLeft) {
-        this.airRollLeft = airRollLeft;
-    }
-
-    public String getAirRollRight() {
-        return airRollRight;
-    }
-
-    public void setAirRollRight(String airRollRight) {
-        this.airRollRight = airRollRight;
-    }
+//    public String getAirRollLeft() {
+//        return airRollLeft;
+//    }
+//
+//    public void setAirRollLeft(String airRollLeft) {
+//        this.airRollLeft = airRollLeft;
+//    }
+//
+//    public String getAirRollRight() {
+//        return airRollRight;
+//    }
+//
+//    public void setAirRollRight(String airRollRight) {
+//        this.airRollRight = airRollRight;
+//    }
 
     public String getBoost() {
         return boost;
@@ -156,8 +158,8 @@ public class ControlSettings implements Persistable <ControlSettings> {
         return id == that.id &&
                 Objects.equals(powerSlide, that.powerSlide) &&
                 Objects.equals(airRoll, that.airRoll) &&
-                Objects.equals(airRollLeft, that.airRollLeft) &&
-                Objects.equals(airRollRight, that.airRollRight) &&
+//                Objects.equals(airRollLeft, that.airRollLeft) &&
+//                Objects.equals(airRollRight, that.airRollRight) &&
                 Objects.equals(boost, that.boost) &&
                 Objects.equals(jump, that.jump) &&
                 Objects.equals(ballCam, that.ballCam) &&
@@ -167,7 +169,9 @@ public class ControlSettings implements Persistable <ControlSettings> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, powerSlide, airRoll, airRollLeft, airRollRight, boost, jump, ballCam, brake, throttle);
+        return Objects.hash(id, powerSlide, airRoll,
+//                airRollLeft, airRollRight,
+                boost, jump, ballCam, brake, throttle);
     }
 
     @Override
@@ -176,8 +180,8 @@ public class ControlSettings implements Persistable <ControlSettings> {
                 "controlSettingsId=" + id +
                 ", powerSlide='" + powerSlide + '\'' +
                 ", airRoll='" + airRoll + '\'' +
-                ", airRollLeft='" + airRollLeft + '\'' +
-                ", airRollRight='" + airRollRight + '\'' +
+//                ", airRollLeft='" + airRollLeft + '\'' +
+//                ", airRollRight='" + airRollRight + '\'' +
                 ", boost='" + boost + '\'' +
                 ", jump='" + jump + '\'' +
                 ", ballCam='" + ballCam + '\'' +
