@@ -1,9 +1,10 @@
 package ProjectSquishy;
 
-import ProjectSquishy.models.GenericDao;
-import ProjectSquishy.models.Player;
+import ProjectSquishy.models.*;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,14 +20,22 @@ public class RunJPA {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("sqlDBconnect");
 		GenericDao<Player> playerDao = new GenericDao<>(emf, Player.class);
 
-//		Player player = new Player();
 
-//		playerDao.add(player);
+
+		Player player = new Player();
+		DeadzoneSettings deadzoneSettings = new DeadzoneSettings();
+		ControlSettings controlSettings =  new ControlSettings();
+		CameraSettings cameraSettings = new CameraSettings();
+
+		player.setControlSettings(controlSettings);
+		player.setDeadzoneSettings(deadzoneSettings);
+		player.setCameraSettings(cameraSettings);
+
+
+		playerDao.add(player);
 
 
 		emf.close();
-
-
 
 	}
 }

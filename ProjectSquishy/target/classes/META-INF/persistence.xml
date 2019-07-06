@@ -18,10 +18,10 @@
 			<property name="hibernate.use_sql_comments" value="true" />
 
 			<!-- SQL dialect -->
-			<property name="hibernate.dialect" value = "org.hibernate.dialect.MySQLInnoDBDialect"/>
+			<property name="hibernate.dialect" value = "org.hibernate.dialect.MySQL5Dialect"/>
 
 			<!-- Connection config -->
-			<property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver" />
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
 			<property name="hibernate.connection.url" value = "jdbc:mysql://119.18.39.248:3306/project"/>
 			<property name="hibernate.connection.username" value="Matt" />
 			<property name="hibernate.connection.password" value="Blake" />
