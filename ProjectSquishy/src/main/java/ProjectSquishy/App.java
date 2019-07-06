@@ -33,21 +33,33 @@ public class App {
 
         System.out.println(players.keySet());
 
-        printPlayerData(players);
+//        printPlayerData(players);
 
 
+
+
+
+        // Create Entity Manager Factory
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("sqlDBconnect");
+
+        // Create Daos
         GenericDao<Player> playerDao = new GenericDao<>(emf, Player.class);
+        GenericDao<ControlSettings> controlDao = new GenericDao<>(emf, ControlSettings.class);
+        GenericDao<CameraSettings> cameraDao = new GenericDao<>(emf, CameraSettings.class);
+        GenericDao<DeadzoneSettings> deadzoneDao = new GenericDao<>(emf, DeadzoneSettings.class);
 
-        ControlSettings controlSettings = new ControlSettings("b", "x", "a", "s", "f", "a", "z");
-        CameraSettings cameraSettings = new CameraSettings(true, 1,1,1,1,1.0,1.0, true);
-        DeadzoneSettings deadzoneSettings = new DeadzoneSettings("cross", 2.0,2.0,2.0,2.0);
+
+        for (Map.Entry<String, Player> player : players.entrySet()) {
+            if (player.getValue().getDeadzoneSettings() != null && player.getValue().getCameraSettings() != null && player.getValue().getControlSettings() != null) {
+                cameraDao.add(player.getValue().getCameraSettings());
+                controlDao.add(player.getValue().getControlSettings());
+                deadzoneDao.add(player.getValue().getDeadzoneSettings());
+                playerDao.add(player.getValue());
+            }
+        }
 
 
-        Player player = new Player("Matt", controlSettings, cameraSettings, deadzoneSettings );
-
-        playerDao.add(player);
-
+        // Close Entity Manager Factory
         emf.close();
 
     }

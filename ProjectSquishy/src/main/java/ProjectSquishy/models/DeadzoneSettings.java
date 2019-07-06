@@ -1,5 +1,7 @@
 package ProjectSquishy.models;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -10,9 +12,9 @@ public class DeadzoneSettings implements Persistable<DeadzoneSettings> {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "CAMERA_SETTINGS_ID")
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
+    private long deadzoneSettingsId;
 
     @Column(name = "DEADZONE_SHAPE")
     private String deadzoneShape;
@@ -29,7 +31,7 @@ public class DeadzoneSettings implements Persistable<DeadzoneSettings> {
     @Column(name = "STEERING_SENSITIVITY")
     private double steeringSensitivity;
 
-    @OneToOne(mappedBy = "deadzoneSettings", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "deadzoneSettings")
     private Player player;
 
     public DeadzoneSettings() {
@@ -44,8 +46,8 @@ public class DeadzoneSettings implements Persistable<DeadzoneSettings> {
     }
 
     @Override
-    public int getId() {
-        return id;
+    public long getControlSettingsId() {
+        return deadzoneSettingsId;
     }
 
     public String getDeadzoneShape() {
@@ -91,7 +93,7 @@ public class DeadzoneSettings implements Persistable<DeadzoneSettings> {
 
     @Override
     public void update(DeadzoneSettings updateType) {
-        if (id == updateType.id) {
+        if (deadzoneSettingsId == updateType.deadzoneSettingsId) {
             deadzoneShape = updateType.deadzoneShape;
             deadzone = updateType.deadzone;
             dodgeDeadzone = updateType.dodgeDeadzone;
@@ -105,7 +107,7 @@ public class DeadzoneSettings implements Persistable<DeadzoneSettings> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DeadzoneSettings that = (DeadzoneSettings) o;
-        return id == that.id &&
+        return deadzoneSettingsId == that.deadzoneSettingsId &&
                 Objects.equals(deadzoneShape, that.deadzoneShape) &&
                 Objects.equals(deadzone, that.deadzone) &&
                 Objects.equals(dodgeDeadzone, that.dodgeDeadzone) &&
@@ -115,13 +117,13 @@ public class DeadzoneSettings implements Persistable<DeadzoneSettings> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, deadzoneShape, deadzone, dodgeDeadzone, aerialSensitivity, steeringSensitivity);
+        return Objects.hash(deadzoneSettingsId, deadzoneShape, deadzone, dodgeDeadzone, aerialSensitivity, steeringSensitivity);
     }
 
     @Override
     public String toString() {
         return "DeadzoneSettings{" +
-                "id=" + id +
+                "id=" + deadzoneSettingsId +
                 ", deadzoneShape='" + deadzoneShape + '\'' +
                 ", deadzone=" + deadzone +
                 ", dodgeDeadzone=" + dodgeDeadzone +

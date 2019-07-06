@@ -1,7 +1,7 @@
 package ProjectSquishy.models;
 
 public interface Persistable<T> {
-	int getId();
+	long getControlSettingsId();
 	void update(T updateType);
 	
 }

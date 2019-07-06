@@ -1,33 +1,39 @@
 package ProjectSquishy.models;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 
-@Entity
+@Entity(name = "PLAYER")
 @Table(name = "PLAYER")
 public class Player implements Persistable<Player> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(
+            strategy = GenerationType.AUTO,
+            generator = "native"
+    )
+    @GenericGenerator(
+            name = "native",
+            strategy = "native"
+    )
+    private long playerId;
 
     @Column(name = "PLAYER_NAME")
     private String playerName;
 
     @OneToOne
-    @MapsId
-//    @JoinColumn(name = "CONTROL_SETTINGS_ID")
+    @JoinColumn(name = "CONTROL_SETTINGS_ID")
     private ControlSettings controlSettings;
 
     @OneToOne
-    @MapsId
-//    @JoinColumn(name = "CAMERA_SETTINGS_ID")
+    @JoinColumn(name = "CAMERA_SETTINGS_ID")
     private CameraSettings cameraSettings;
 
     @OneToOne
-    @MapsId
-//    @JoinColumn(name = "DEADZONE_SETTINGS_ID")
+    @JoinColumn(name = "DEADZONE_SETTINGS_ID")
     private DeadzoneSettings deadzoneSettings;
 
 
@@ -42,13 +48,13 @@ public class Player implements Persistable<Player> {
     }
 
     @Override
-    public int getId() {
-        return id;
+    public long getControlSettingsId() {
+        return playerId;
     }
 
     @Override
     public void update(Player updateType) {
-        if (id == updateType.id) {
+        if (playerId == updateType.playerId) {
             controlSettings = updateType.controlSettings;
             cameraSettings = updateType.cameraSettings;
             deadzoneSettings = updateType.deadzoneSettings;
@@ -92,19 +98,19 @@ public class Player implements Persistable<Player> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Player player = (Player) o;
-        return id == player.id &&
+        return playerId == player.playerId &&
                 Objects.equals(playerName, player.playerName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, playerName);
+        return Objects.hash(playerId, playerName);
     }
 
     @Override
     public String toString() {
         return "Player{" +
-                "id=" + id +
+                "id=" + playerId +
                 ", playerName='" + playerName + '\'' +
                 ", controlSettings=" + controlSettings.toString() +
                 ", cameraSettings=" + cameraSettings.toString() +
