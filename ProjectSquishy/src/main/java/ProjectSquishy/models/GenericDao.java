@@ -35,7 +35,7 @@ public class GenericDao<T extends Persistable<T>> {
 	public void update(T updateType) {
 		EntityManager manager = emf.createEntityManager();
 		EntityTransaction transaction = manager.getTransaction();
-		T databaseType = manager.find(clazz, updateType.getId());
+		T databaseType = manager.find(clazz, updateType.getControlSettingsId());
 		transaction.begin();  
 		databaseType.update(updateType);
 		cleanUp(manager, transaction); 
@@ -53,7 +53,6 @@ public class GenericDao<T extends Persistable<T>> {
 
 	public List<T> getAll() {
 		String tableName = clazz.getAnnotation(Table.class).name();
-		System.out.println(tableName);
 		EntityManager manager = emf.createEntityManager();
 		TypedQuery<T> query = manager.createQuery("SELECT e FROM " + tableName + " e", clazz);
 		List<T> result = query.getResultList();
@@ -64,7 +63,6 @@ public class GenericDao<T extends Persistable<T>> {
 	}
 	public List<T> getAllSearch(String searchRequest) {
 		String tableName = clazz.getAnnotation(Table.class).name();
-		System.out.println(tableName);
 		EntityManager manager = emf.createEntityManager();
 		TypedQuery<T> query = manager.createQuery("SELECT e FROM " + tableName + " e WHERE e.FACT_NAME LIKE :search", clazz).setParameter(":search", searchRequest);
 		List<T> result = query.getResultList();

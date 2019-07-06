@@ -66,7 +66,7 @@ public class DataMapper {
             settings.setAerialSensitivity(Double.valueOf(values.get(5)));
             settings.setSteeringSensitivity(Double.valueOf(values.get(6)));
 
-            System.out.println(values.get(0));
+
             if (players.get(values.get(0)) != null) {
                 players.get(values.get(0)).setDeadzoneSettings(settings);
             } else {
