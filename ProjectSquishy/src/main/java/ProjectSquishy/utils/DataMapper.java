@@ -85,22 +85,28 @@ public class DataMapper {
             }
 
 
-            settings.setPowerSlide(values.get(0));
-            settings.setAirRoll(values.get(1));
+            if (!(values.isEmpty())) {
+                System.out.println(values.size());
+
+                settings.setPowerSlide(values.get(0));
+                settings.setAirRoll(values.get(1));
 //            settings.setAirRollLeft(values.get(4));
 //            settings.setAirRollRight(values.get(5));
-            settings.setBoost(values.get(2));
-            settings.setJump(values.get(3));
-            settings.setBallCam(values.get(4));
-            settings.setBrake(values.get(5));
-            settings.setThrottle(values.get(6));
+                settings.setBoost(values.get(2));
+                settings.setJump(values.get(3));
+                settings.setBallCam(values.get(4));
+                settings.setBrake(values.get(5));
+                settings.setThrottle(values.get(6));
 
-            if (players.get(playerName) != null) {
-                players.get(playerName).setControlSettings(settings);
-            } else {
-                Player player = new Player();
-                player.setControlSettings(settings);
-                players.put(playerName, player);
+
+                if (players.get(playerName) != null) {
+                    players.get(playerName).setControlSettings(settings);
+                } else {
+                    Player player = new Player();
+                    player.setControlSettings(settings);
+                    players.put(playerName, player);
+                }
+                values.clear();
             }
         }
     }

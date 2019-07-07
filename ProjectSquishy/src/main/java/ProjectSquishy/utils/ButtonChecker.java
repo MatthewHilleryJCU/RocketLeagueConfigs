@@ -12,6 +12,7 @@ public class ButtonChecker {
     private static final String XBOXR2 = "/commons/images/7/7a/Xbox_Right_Trigger.svg";
     private static final String XBOXL1 = "/commons/images/8/8c/Xbox_Left_Bumper.svg";
     private static final String XBOXL2 = "/commons/images/2/23/Xbox_Left_Trigger.svg";
+    private static final String XBOXLeftStick = "/commons/images/6/68/Xbox_Left_stick.svg";
 
     private static final String PS4CROSS = "/commons/images/8/8f/PlayStation_button_X.svg";
     private static final String PS4CIRCLE = "/commons/images/6/6b/PlayStation_button_C.svg";
@@ -21,6 +22,7 @@ public class ButtonChecker {
     private static final String PS4R2 = "/commons/images/0/0e/PlayStation_button_R2.svg";
     private static final String PS4L1 = "/commons/images/6/66/PlayStation_button_L1.svg";
     private static final String PS4L2 = "/commons/images/9/97/PlayStation_button_L2.svg";
+    private static final String PS4L3 = "/commons/images/4/48/PlayStation_button_L3.svg";
 
     private Logger logger = org.apache.log4j.Logger.getLogger(ButtonChecker.class);
 
@@ -52,6 +54,9 @@ public class ButtonChecker {
             case XBOXL2:
             case PS4L2:
                 return "L2";
+            case XBOXLeftStick:
+            case PS4L3:
+                return "L3";
             default:
                 logger.error("Couldn't map button from: " + buttonSource);
                 return "Couldn't map button";
