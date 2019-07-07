@@ -15,6 +15,7 @@ public class ButtonCheckerTest {
     private static final String XBOXR2 = "/commons/images/7/7a/Xbox_Right_Trigger.svg";
     private static final String XBOXL1 = "/commons/images/8/8c/Xbox_Left_Bumper.svg";
     private static final String XBOXL2 = "/commons/images/2/23/Xbox_Left_Trigger.svg";
+    private static final String XBOXLeftStick = "/commons/images/6/68/Xbox_Left_stick.svg";
 
     private static final String PS4CROSS = "/commons/images/8/8f/PlayStation_button_X.svg";
     private static final String PS4CIRCLE = "/commons/images/6/6b/PlayStation_button_C.svg";
@@ -24,6 +25,7 @@ public class ButtonCheckerTest {
     private static final String PS4R2 = "/commons/images/0/0e/PlayStation_button_R2.svg";
     private static final String PS4L1 = "/commons/images/6/66/PlayStation_button_L1.svg";
     private static final String PS4L2 = "/commons/images/9/97/PlayStation_button_L2.svg";
+    private static final String PS4L3 = "/commons/images/4/48/PlayStation_button_L3.svg";
 
     private final ButtonChecker buttonChecker = new ButtonChecker();
 
@@ -110,6 +112,15 @@ public class ButtonCheckerTest {
     @Test
     public void when_passing_a_random_string_to_checkout_button_couldnt_map_button_is_returned() {
         assertEquals("L2", buttonChecker.checkButton(PS4L2));
+    }
+    @Test
+    public void when_passing_a_XBOXLeftStick_string_to_checkout_button_cross_is_returned() {
+        assertEquals("L3", buttonChecker.checkButton(XBOXLeftStick));
+    }
+
+    @Test
+    public void when_passing_a_PS4L3_string_to_checkout_button_circle_is_returned() {
+        assertEquals("L3", buttonChecker.checkButton(PS4L3));
     }
 
 }

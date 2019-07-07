@@ -36,9 +36,6 @@ public class App {
 //        printPlayerData(players);
 
 
-
-
-
         // Create Entity Manager Factory
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("sqlDBconnect");
 
