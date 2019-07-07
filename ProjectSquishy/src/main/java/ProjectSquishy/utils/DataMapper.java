@@ -85,7 +85,7 @@ public class DataMapper {
             }
 
 
-            if (values.size() != 0 ) {
+            if (!(values.isEmpty())) {
                 System.out.println(values.size());
 
                 settings.setPowerSlide(values.get(0));
