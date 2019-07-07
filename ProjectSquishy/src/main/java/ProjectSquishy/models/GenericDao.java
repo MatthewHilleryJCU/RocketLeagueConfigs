@@ -64,7 +64,7 @@ public class GenericDao<T extends Persistable<T>> {
 	public List<T> getAllSearch(String searchRequest) {
 		String tableName = clazz.getAnnotation(Table.class).name();
 		EntityManager manager = emf.createEntityManager();
-		TypedQuery<T> query = manager.createQuery("SELECT e FROM " + tableName + " e WHERE e.FACT_NAME LIKE :search", clazz).setParameter(":search", searchRequest);
+		TypedQuery<T> query = manager.createQuery("SELECT e FROM " + tableName + " e WHERE e.PLAYER_NAME LIKE :search", clazz).setParameter(":search", searchRequest);
 		List<T> result = query.getResultList();
 		manager.close(); 
 		

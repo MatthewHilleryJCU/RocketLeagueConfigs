@@ -20,7 +20,6 @@ public class DataMapper {
 
     public Map<String, Player> mapData(Map<String, Player> players, Document cameraDoc, Document controlDoc, Document deadzoneDoc) {
 
-
         mapCameraData(cameraDoc, players);
         mapControlData(controlDoc, players);
         mapDeadzoneData(deadzoneDoc, players);
@@ -31,7 +30,6 @@ public class DataMapper {
 
         Element table = deadzoneDoc.select("table").get(1); //select the first table.
         Elements rows = table.select("tr");
-
         ArrayList<String> values = new ArrayList<>();
 
         for (int i = 1; i < rows.size(); i++) { //first row is the col names so skip it.
@@ -50,7 +48,6 @@ public class DataMapper {
             settings.setAerialSensitivity(Double.valueOf(values.get(5)));
             settings.setSteeringSensitivity(Double.valueOf(values.get(6)));
 
-
             if (players.get(values.get(0)) != null) {
                 players.get(values.get(0)).setDeadzoneSettings(settings);
             } else {
@@ -66,7 +63,6 @@ public class DataMapper {
 
         Element table = controlDoc.select("table").get(1); //select the first table.
         Elements rows = table.select("tr");
-
         ArrayList<String> values = new ArrayList<>();
 
         for (int i = 1; i < rows.size(); i++) { //first row is the col names so skip it.
@@ -77,7 +73,6 @@ public class DataMapper {
 
             for (int j = 2; j < cols.size(); j++) {
                 String l = cols.get(j).getElementsByTag("img").toString();
-
                 String checkedForButton = buttonChecker.checkButton(stringFormatter.formatSrcString(l));
                 if (checkedForButton != ("Couldn't map button")) {
                     values.add(checkedForButton);
@@ -86,7 +81,6 @@ public class DataMapper {
 
 
             if (!(values.isEmpty())) {
-                System.out.println(values.size());
 
                 settings.setPowerSlide(values.get(0));
                 settings.setAirRoll(values.get(1));
@@ -97,7 +91,6 @@ public class DataMapper {
                 settings.setBallCam(values.get(4));
                 settings.setBrake(values.get(5));
                 settings.setThrottle(values.get(6));
-
 
                 if (players.get(playerName) != null) {
                     players.get(playerName).setControlSettings(settings);
@@ -115,7 +108,6 @@ public class DataMapper {
 
         Element table = cameraDoc.select("table").get(1); //select the first table.
         Elements rows = table.select("tr");
-
         ArrayList<String> values = new ArrayList<>();
 
         for (int i = 1; i < rows.size(); i++) { //first row is the col names so skip it.
@@ -144,7 +136,5 @@ public class DataMapper {
             values.clear();
         }
     }
-
-
 }
 
