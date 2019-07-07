@@ -43,6 +43,7 @@ public class App {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("sqlDBconnect");
 
         // Create Daos
+
         GenericDao<Player> playerDao = new GenericDao<>(emf, Player.class);
         GenericDao<ControlSettings> controlDao = new GenericDao<>(emf, ControlSettings.class);
         GenericDao<CameraSettings> cameraDao = new GenericDao<>(emf, CameraSettings.class);
@@ -93,6 +94,7 @@ public class App {
         Document cameraDoc = parser.parse(cameraUrl);
         Document controlDoc = parser.parse(controlUrl);
         Document deadzoneDoc = parser.parse(deadzoneUrl);
+
         players = mapper.mapData(players, cameraDoc, controlDoc, deadzoneDoc);
         return players;
     }
