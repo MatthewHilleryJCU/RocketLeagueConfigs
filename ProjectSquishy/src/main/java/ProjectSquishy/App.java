@@ -4,6 +4,7 @@ package ProjectSquishy;
 import ProjectSquishy.models.*;
 import ProjectSquishy.utils.DataMapper;
 import ProjectSquishy.utils.HtmlParser;
+import ProjectSquishy.utils.BannerPrinter;
 import org.jsoup.nodes.Document;
 
 import javax.persistence.EntityManagerFactory;
@@ -11,31 +12,33 @@ import javax.persistence.Persistence;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Hello world!
- */
+
 public class App {
 
     private static String cameraUrl = "https://liquipedia.net/rocketleague/List_of_player_camera_settings";
     private static String controlUrl = "https://liquipedia.net/rocketleague/List_of_player_control_settings";
     private static String deadzoneUrl = "https://liquipedia.net/rocketleague/List_of_player_deadzone_settings";
 
+
+
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+
+
+        System.out.println("");
 
         HtmlParser parser = new HtmlParser();
         DataMapper mapper = new DataMapper();
+        BannerPrinter bannerPrinter = new BannerPrinter();
         Map<String, Player> players = new HashMap<>();
 
-
-        players = handlePlayerData(parser, mapper, players);
-
-
-        System.out.println(players.keySet());
-
+        bannerPrinter.print();
+//        players = handlePlayerData(parser, mapper, players);
 //        printPlayerData(players);
+//        addToDatabase(players);
 
+    }
 
+    private static void addToDatabase(Map<String, Player> players) {
         // Create Entity Manager Factory
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("sqlDBconnect");
 
@@ -46,7 +49,6 @@ public class App {
         GenericDao<CameraSettings> cameraDao = new GenericDao<>(emf, CameraSettings.class);
         GenericDao<DeadzoneSettings> deadzoneDao = new GenericDao<>(emf, DeadzoneSettings.class);
 
-
         for (Map.Entry<String, Player> player : players.entrySet()) {
             if (player.getValue().getDeadzoneSettings() != null && player.getValue().getCameraSettings() != null && player.getValue().getControlSettings() != null) {
                 cameraDao.add(player.getValue().getCameraSettings());
@@ -56,10 +58,8 @@ public class App {
             }
         }
 
-
         // Close Entity Manager Factory
         emf.close();
-
     }
 
     private static void printPlayerData(Map<String, Player> players) {
