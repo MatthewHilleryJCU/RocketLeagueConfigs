@@ -1,4 +1,4 @@
-package ProjectSquishy.models;
+package ProjectSquishy.dao;
 
 import javax.persistence.*;
 import java.util.List;
@@ -56,7 +56,7 @@ public class GenericDao<T extends Persistable<T>> {
 		EntityManager manager = emf.createEntityManager();
 		TypedQuery<T> query = manager.createQuery("SELECT e FROM " + tableName + " e", clazz);
 		List<T> result = query.getResultList();
-		manager.close(); 
+		manager.close();
 
 		return result;
 

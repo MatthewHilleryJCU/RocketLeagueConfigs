@@ -1,5 +1,7 @@
-package ProjectSquishy.models;
+package ProjectSquishy.models.settings;
 
+import ProjectSquishy.dao.Persistable;
+import ProjectSquishy.models.Player;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -7,7 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "CONTROL_SETTINGS")
-public class ControlSettings implements Persistable <ControlSettings> {
+public class ControlSettings implements Persistable<ControlSettings> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")

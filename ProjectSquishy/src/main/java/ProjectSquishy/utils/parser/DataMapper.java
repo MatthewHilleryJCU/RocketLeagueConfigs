@@ -1,8 +1,8 @@
-package ProjectSquishy.utils;
+package ProjectSquishy.utils.parser;
 
-import ProjectSquishy.models.CameraSettings;
-import ProjectSquishy.models.ControlSettings;
-import ProjectSquishy.models.DeadzoneSettings;
+import ProjectSquishy.models.settings.CameraSettings;
+import ProjectSquishy.models.settings.ControlSettings;
+import ProjectSquishy.models.settings.DeadzoneSettings;
 import ProjectSquishy.models.Player;
 import org.apache.log4j.Logger;
 import org.jsoup.nodes.Document;

@@ -1,5 +1,7 @@
-package ProjectSquishy.models;
+package ProjectSquishy.models.settings;
 
+import ProjectSquishy.dao.Persistable;
+import ProjectSquishy.models.Player;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

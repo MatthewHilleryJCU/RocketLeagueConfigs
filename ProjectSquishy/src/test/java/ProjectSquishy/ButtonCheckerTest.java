@@ -1,6 +1,6 @@
 package ProjectSquishy;
 
-import ProjectSquishy.utils.ButtonChecker;
+import ProjectSquishy.utils.parser.ButtonChecker;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

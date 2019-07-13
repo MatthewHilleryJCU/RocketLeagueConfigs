@@ -1,4 +1,4 @@
-package ProjectSquishy.models;
+package ProjectSquishy.dao;
 
 public interface Persistable<T> {
 	long getControlSettingsId();

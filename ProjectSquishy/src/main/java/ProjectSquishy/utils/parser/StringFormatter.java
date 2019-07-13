@@ -1,4 +1,4 @@
-package ProjectSquishy.utils;
+package ProjectSquishy.utils.parser;
 
 public class StringFormatter {
 

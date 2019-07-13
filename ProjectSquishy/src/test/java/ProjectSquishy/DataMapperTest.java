@@ -1,7 +1,7 @@
 package ProjectSquishy;
 
 import ProjectSquishy.models.Player;
-import ProjectSquishy.utils.DataMapper;
+import ProjectSquishy.utils.parser.DataMapper;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Test;

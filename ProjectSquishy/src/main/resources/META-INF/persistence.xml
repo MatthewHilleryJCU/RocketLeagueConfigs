@@ -28,7 +28,7 @@
 
 
 			<!-- validate, create, create-drop, update -->
-			<property name="hibernate.hbm2ddl.auto" value="create" /> <!-- remove this once once DB tables are created -->
+			<!--<property name="hibernate.hbm2ddl.auto" value="create" /> &lt;!&ndash; remove this once once DB tables are created &ndash;&gt;-->
 
 			<!-- Connection pooling config -->
 			<property name="hibernate.c3p0.min_size" value="2" />

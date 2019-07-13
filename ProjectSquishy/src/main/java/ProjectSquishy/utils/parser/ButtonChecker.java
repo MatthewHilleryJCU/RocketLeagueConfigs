@@ -1,4 +1,4 @@
-package ProjectSquishy.utils;
+package ProjectSquishy.utils.parser;
 
 import org.apache.log4j.Logger;
 

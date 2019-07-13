@@ -1,7 +1,7 @@
 //package ProjectSquishy.utils;
 //
-//import ProjectSquishy.models.CameraSettings;
-//import ProjectSquishy.models.ControlSettings;
+//import ProjectSquishy.models.settings.CameraSettings;
+//import ProjectSquishy.models.settings.ControlSettings;
 //import ProjectSquishy.models.Player;
 //import org.json.simple.JSONObject;
 //
