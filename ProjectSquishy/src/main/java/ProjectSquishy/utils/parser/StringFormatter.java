@@ -11,4 +11,8 @@ public class StringFormatter {
         }
         return "Empty string found";
     }
+
+    public String formatPlayerName (String unformattedString){
+        return unformattedString.substring(0,unformattedString.length()/2);
+    }
 }

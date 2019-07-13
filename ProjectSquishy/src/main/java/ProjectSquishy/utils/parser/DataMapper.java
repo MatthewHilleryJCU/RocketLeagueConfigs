@@ -48,8 +48,8 @@ public class DataMapper {
             settings.setAerialSensitivity(Double.valueOf(values.get(5)));
             settings.setSteeringSensitivity(Double.valueOf(values.get(6)));
 
-            if (players.get(values.get(0)) != null) {
-                players.get(values.get(0)).setDeadzoneSettings(settings);
+            if (players.get(stringFormatter.formatPlayerName(values.get(0))) != null) {
+                players.get(stringFormatter.formatPlayerName(values.get(0))).setDeadzoneSettings(settings);
             } else {
                 Player player = new Player();
                 player.setDeadzoneSettings(settings);
@@ -69,7 +69,7 @@ public class DataMapper {
             Element row = rows.get(i);
             Elements cols = row.select("td");
             ControlSettings settings = new ControlSettings();
-            String playerName = cols.get(0).text() + " " + cols.get(0).text();
+            String playerName = stringFormatter.formatPlayerName(cols.get(0).text() + " " + cols.get(0).text());
 
             for (int j = 2; j < cols.size(); j++) {
                 String l = cols.get(j).getElementsByTag("img").toString();
@@ -121,7 +121,7 @@ public class DataMapper {
                 values.add(l);
             }
 
-            player.setPlayerName(values.get(0));
+            player.setPlayerName(stringFormatter.formatPlayerName(values.get(0)));
             settings.setCameraShake(Boolean.valueOf(values.get(2)));
             settings.setFov(Long.valueOf(values.get(3)));
             settings.setHeight(Long.valueOf(values.get(4)));

@@ -31,6 +31,7 @@ public class App {
         ParserController parserController = new ParserController(htmlParserFactory, dataMapperFactory);
         DaoController daoController = new DaoController();
         Map<String, Player> players;
+        List<Player> searchedPlayers;
 
 
         // Create Entity Manager Factory
@@ -42,32 +43,41 @@ public class App {
         GenericDao<CameraSettings> cameraDao = new GenericDao<>(emf, CameraSettings.class);
         GenericDao<DeadzoneSettings> deadzoneDao = new GenericDao<>(emf, DeadzoneSettings.class);
 
+        searchedPlayers = playerDao.getAll();
+
+
 
         bannerPrinter.print();
 
+
+
         Scanner s = new Scanner(System.in);
         System.out.println("\n Welcome to ProjectSquishy! \n");
-        int pick = printMenu(s);
-        List<Player> searchedPlayers;
 
-
+        int pick = 0;
         while (pick != 9) {
             pick = printMenu(s);
             switch (pick) {
                 case 1:
-                    searchedPlayers = playerDao.getAll();
-//            System.out.println(searchedPlayers);
                     for (Player player : searchedPlayers) {
                         System.out.println(player.getPlayerName());
                     }
                     break;
                 case 2:
-                    System.out.println("What player?");
-                    String playerChoice = s.nextLine();
-                    searchedPlayers = playerDao.getAllSearch(playerChoice);
-                    System.out.println(searchedPlayers);
+                    for (Player player : searchedPlayers) {
+                        System.out.println(player.toString());
+                    }
                     break;
                 case 3:
+                    System.out.println("What player?");
+                    String playerChoice = s.nextLine().toLowerCase();
+                    for (Player player : searchedPlayers) {
+                        if (player.getPlayerName().toLowerCase().contains(playerChoice)){
+                            System.out.println(player.toString());
+                        }
+                    }
+                    break;
+                case 4:
                     players = parserController.parsePlayerData();
                     playerDataController.print(players);
                     daoController.addAllPlayers(players, playerDao, controlDao, cameraDao, deadzoneDao);
@@ -79,19 +89,21 @@ public class App {
             }
         }
 
-
         // Close Entity Manager Factory
         emf.close();
     }
 
-
     private static int printMenu(Scanner s) {
-        System.out.println("(1) Show all players settings");
-        System.out.println("(2) Choose a players settings");
-        System.out.println("(3) Update player data");
+        System.out.println("(1) Show all player names");
+        System.out.println("(2) Show all players settings");
+        System.out.println("(3) Choose a players settings");
+        System.out.println("(4) Update player data");
         System.out.println("(9) Quit");
-        return Integer.valueOf(s.nextLine());
+        int choice = 0;
+        try {
+            choice = Integer.valueOf(s.nextLine());
+        } catch (NumberFormatException e){
+        }
+        return choice;
     }
-
-
 }
