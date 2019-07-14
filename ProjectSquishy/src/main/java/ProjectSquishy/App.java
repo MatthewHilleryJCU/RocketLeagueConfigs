@@ -65,7 +65,7 @@ public class App {
                     break;
                 case 2:
                     for (Player player : searchedPlayers) {
-                        System.out.println(player.toString());
+                        playerDataController.printPlayer(player);
                     }
                     break;
                 case 3:
@@ -73,13 +73,13 @@ public class App {
                     String playerChoice = s.nextLine().toLowerCase();
                     for (Player player : searchedPlayers) {
                         if (player.getPlayerName().toLowerCase().contains(playerChoice)){
-                            System.out.println(player.toString());
+                           playerDataController.printPlayer(player);
                         }
                     }
                     break;
                 case 4:
                     players = parserController.parsePlayerData();
-                    playerDataController.print(players);
+                    playerDataController.printAllPlayers(players);
                     daoController.addAllPlayers(players, playerDao, controlDao, cameraDao, deadzoneDao);
                     break;
                 case 9:
