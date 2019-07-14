@@ -11,7 +11,6 @@ import ProjectSquishy.models.settings.ControlSettings;
 import ProjectSquishy.models.settings.DeadzoneSettings;
 import ProjectSquishy.utils.BannerPrinter;
 import ProjectSquishy.utils.IO.AccessResource;
-import ProjectSquishy.utils.IO.FileFromResources;
 import ProjectSquishy.utils.IO.PlayerDataController;
 import ProjectSquishy.utils.parser.ParserController;
 import javafx.application.Application;
