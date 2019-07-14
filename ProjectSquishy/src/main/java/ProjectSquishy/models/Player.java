@@ -1,5 +1,9 @@
 package ProjectSquishy.models;
 
+import ProjectSquishy.dao.Persistable;
+import ProjectSquishy.models.settings.CameraSettings;
+import ProjectSquishy.models.settings.ControlSettings;
+import ProjectSquishy.models.settings.DeadzoneSettings;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

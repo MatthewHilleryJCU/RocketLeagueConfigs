@@ -1,60 +1,91 @@
 package ProjectSquishy;
 
 
-import ProjectSquishy.models.*;
-import ProjectSquishy.utils.DataMapper;
-import ProjectSquishy.utils.HtmlParser;
+import ProjectSquishy.dao.DaoController;
+import ProjectSquishy.dao.GenericDao;
+import ProjectSquishy.factories.DataMapperFactory;
+import ProjectSquishy.factories.HtmlParserFactory;
+import ProjectSquishy.models.Player;
+import ProjectSquishy.models.settings.CameraSettings;
+import ProjectSquishy.models.settings.ControlSettings;
+import ProjectSquishy.models.settings.DeadzoneSettings;
 import ProjectSquishy.utils.BannerPrinter;
-import org.jsoup.nodes.Document;
+import ProjectSquishy.utils.IO.PlayerDataController;
+import ProjectSquishy.utils.parser.ParserController;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 
 public class App {
 
-    private static String cameraUrl = "https://liquipedia.net/rocketleague/List_of_player_camera_settings";
-    private static String controlUrl = "https://liquipedia.net/rocketleague/List_of_player_control_settings";
-    private static String deadzoneUrl = "https://liquipedia.net/rocketleague/List_of_player_deadzone_settings";
-
-
-
     public static void main(String[] args) {
 
-
-        System.out.println("");
-
-        HtmlParser parser = new HtmlParser();
-        DataMapper mapper = new DataMapper();
         BannerPrinter bannerPrinter = new BannerPrinter();
-        Map<String, Player> players = new HashMap<>();
+        HtmlParserFactory htmlParserFactory = new HtmlParserFactory();
+        DataMapperFactory dataMapperFactory = new DataMapperFactory();
+        PlayerDataController playerDataController = new PlayerDataController();
+        ParserController parserController = new ParserController(htmlParserFactory, dataMapperFactory);
+        DaoController daoController = new DaoController();
+        Map<String, Player> players;
+        List<Player> searchedPlayers;
 
-        bannerPrinter.print();
-//        players = handlePlayerData(parser, mapper, players);
-//        printPlayerData(players);
-//        addToDatabase(players);
 
-    }
-
-    private static void addToDatabase(Map<String, Player> players) {
         // Create Entity Manager Factory
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("sqlDBconnect");
 
         // Create Daos
-
         GenericDao<Player> playerDao = new GenericDao<>(emf, Player.class);
         GenericDao<ControlSettings> controlDao = new GenericDao<>(emf, ControlSettings.class);
         GenericDao<CameraSettings> cameraDao = new GenericDao<>(emf, CameraSettings.class);
         GenericDao<DeadzoneSettings> deadzoneDao = new GenericDao<>(emf, DeadzoneSettings.class);
 
-        for (Map.Entry<String, Player> player : players.entrySet()) {
-            if (player.getValue().getDeadzoneSettings() != null && player.getValue().getCameraSettings() != null && player.getValue().getControlSettings() != null) {
-                cameraDao.add(player.getValue().getCameraSettings());
-                controlDao.add(player.getValue().getControlSettings());
-                deadzoneDao.add(player.getValue().getDeadzoneSettings());
-                playerDao.add(player.getValue());
+        searchedPlayers = playerDao.getAll();
+
+
+
+        bannerPrinter.print();
+
+
+
+        Scanner s = new Scanner(System.in);
+        System.out.println("\n Welcome to ProjectSquishy! \n");
+
+        int pick = 0;
+        while (pick != 9) {
+            pick = printMenu(s);
+            switch (pick) {
+                case 1:
+                    for (Player player : searchedPlayers) {
+                        System.out.println(player.getPlayerName());
+                    }
+                    break;
+                case 2:
+                    for (Player player : searchedPlayers) {
+                        System.out.println(player.toString());
+                    }
+                    break;
+                case 3:
+                    System.out.println("What player?");
+                    String playerChoice = s.nextLine().toLowerCase();
+                    for (Player player : searchedPlayers) {
+                        if (player.getPlayerName().toLowerCase().contains(playerChoice)){
+                            System.out.println(player.toString());
+                        }
+                    }
+                    break;
+                case 4:
+                    players = parserController.parsePlayerData();
+                    playerDataController.print(players);
+                    daoController.addAllPlayers(players, playerDao, controlDao, cameraDao, deadzoneDao);
+                    break;
+                case 9:
+                    break;
+                default:
+                    System.out.println("Sorry, please enter valid Option");
             }
         }
 
@@ -62,37 +93,17 @@ public class App {
         emf.close();
     }
 
-    private static void printPlayerData(Map<String, Player> players) {
-        for (Map.Entry<String, Player> player : players.entrySet()) {
-
-            System.out.println(player.getKey());
-            if (player.getValue().getDeadzoneSettings() != null) {
-                System.out.println(player.getValue().getDeadzoneSettings().toString());
-            } else {
-                System.out.println("No deadzone data! ");
-            }
-            if (player.getValue().getCameraSettings() != null) {
-                System.out.println(player.getValue().getCameraSettings().toString());
-            } else {
-                System.out.println("No camera setting data!");
-            }
-
-            if (player.getValue().getControlSettings() != null) {
-                System.out.println(player.getValue().getControlSettings().toString());
-            } else {
-                System.out.println("No controls setting data!");
-            }
-
-            System.out.println("______________________________");
+    private static int printMenu(Scanner s) {
+        System.out.println("(1) Show all player names");
+        System.out.println("(2) Show all players settings");
+        System.out.println("(3) Choose a players settings");
+        System.out.println("(4) Update player data");
+        System.out.println("(9) Quit");
+        int choice = 0;
+        try {
+            choice = Integer.valueOf(s.nextLine());
+        } catch (NumberFormatException e){
         }
-    }
-
-    private static Map<String, Player> handlePlayerData(HtmlParser parser, DataMapper mapper, Map<String, Player> players) {
-        Document cameraDoc = parser.parse(cameraUrl);
-        Document controlDoc = parser.parse(controlUrl);
-        Document deadzoneDoc = parser.parse(deadzoneUrl);
-
-        players = mapper.mapData(players, cameraDoc, controlDoc, deadzoneDoc);
-        return players;
+        return choice;
     }
 }

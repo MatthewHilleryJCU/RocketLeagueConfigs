@@ -10,5 +10,5 @@ ______          _           _     _____             _     _
               _/ |                         | |                   __/ |
              |__/                          |_|                  |___/
 
-Build version : @project.version@        Build time: ${maven.build.timestamp}
+Build version : ${project.version}        Build time: ${maven.build.timestamp}
 ######################################################################

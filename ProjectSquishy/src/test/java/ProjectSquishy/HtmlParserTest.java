@@ -1,10 +1,8 @@
 package ProjectSquishy;
 
-import ProjectSquishy.utils.HtmlParser;
+import ProjectSquishy.utils.parser.HtmlParser;
 import org.jsoup.nodes.Document;
 import org.junit.Test;
-
-import java.io.IOException;
 
 import static org.junit.Assert.assertTrue;
 
