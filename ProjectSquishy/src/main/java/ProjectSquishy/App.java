@@ -10,11 +10,16 @@ import ProjectSquishy.models.settings.CameraSettings;
 import ProjectSquishy.models.settings.ControlSettings;
 import ProjectSquishy.models.settings.DeadzoneSettings;
 import ProjectSquishy.utils.BannerPrinter;
+import ProjectSquishy.utils.IO.AccessResource;
 import ProjectSquishy.utils.IO.PlayerDataController;
 import ProjectSquishy.utils.parser.ParserController;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -30,6 +35,7 @@ public class App {
         PlayerDataController playerDataController = new PlayerDataController();
         ParserController parserController = new ParserController(htmlParserFactory, dataMapperFactory);
         DaoController daoController = new DaoController();
+        AccessResource accessResource = new AccessResource();
         Map<String, Player> players;
         List<Player> searchedPlayers;
 
@@ -45,8 +51,14 @@ public class App {
 
         searchedPlayers = playerDao.getAll();
 
-        bannerPrinter.print();
 
+
+        // Create Banner
+        String bannerFileName = "banner.txt";
+        accessResource.printFile(accessResource.getFile(bannerFileName));
+
+
+        // User input
         Scanner s = new Scanner(System.in);
         System.out.println("\n Welcome to ProjectSquishy! \n");
 
