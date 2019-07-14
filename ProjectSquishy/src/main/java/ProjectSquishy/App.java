@@ -27,7 +27,7 @@ import java.util.Scanner;
 
 public class App {
 
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) {
 
         BannerPrinter bannerPrinter = new BannerPrinter();
         HtmlParserFactory htmlParserFactory = new HtmlParserFactory();
@@ -35,6 +35,7 @@ public class App {
         PlayerDataController playerDataController = new PlayerDataController();
         ParserController parserController = new ParserController(htmlParserFactory, dataMapperFactory);
         DaoController daoController = new DaoController();
+        AccessResource accessResource = new AccessResource();
         Map<String, Player> players;
         List<Player> searchedPlayers;
 
@@ -52,13 +53,11 @@ public class App {
 
 
         // Create Banner
-        String fileName = "banner.txt";
-        AccessResource fileRes = new AccessResource();
-        fileRes.printFile(fileRes.getFile(fileName));
+        String bannerFileName = "banner.txt";
+        accessResource.printFile(accessResource.getFile(bannerFileName));
 
 
-
-
+        // User input
         Scanner s = new Scanner(System.in);
         System.out.println("\n Welcome to ProjectSquishy! \n");
 
