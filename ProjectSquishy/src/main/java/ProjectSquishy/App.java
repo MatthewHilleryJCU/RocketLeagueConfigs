@@ -45,11 +45,7 @@ public class App {
 
         searchedPlayers = playerDao.getAll();
 
-
-
         bannerPrinter.print();
-
-
 
         Scanner s = new Scanner(System.in);
         System.out.println("\n Welcome to ProjectSquishy! \n");
