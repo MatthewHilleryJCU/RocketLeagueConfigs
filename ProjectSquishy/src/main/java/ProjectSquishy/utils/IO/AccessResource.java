@@ -6,8 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 
-public class FileFromResources {
-    public File getFileFromResources(String fileName){
+public class AccessResource {
+    public File getFile(String fileName){
         ClassLoader classLoader = getClass().getClassLoader();
         URL resource = classLoader.getResource(fileName);
         if (resource == null) {
@@ -27,5 +27,4 @@ public class FileFromResources {
             }
         }
     }
-
 }
