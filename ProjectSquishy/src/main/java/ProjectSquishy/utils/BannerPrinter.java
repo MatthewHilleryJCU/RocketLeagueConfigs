@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class BannerPrinter {
 
-    public void print () {
+    public void print (File file) {
 
         try {
             File f = new File("src/main/resources/banner.txt");

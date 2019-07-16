@@ -65,6 +65,28 @@ public class Player implements Persistable<Player> {
         }
     }
 
+    public void print() {
+        System.out.println(getPlayerName());
+        if (getDeadzoneSettings() != null) {
+            System.out.println(getDeadzoneSettings().toString());
+        } else {
+            System.out.println("No deadzone data! ");
+        }
+        if (getCameraSettings() != null) {
+            System.out.println(getCameraSettings().toString());
+        } else {
+            System.out.println("No camera settings data!");
+        }
+
+        if (getControlSettings() != null) {
+            System.out.println(getControlSettings().toString());
+        } else {
+            System.out.println("No controls settings data!");
+        }
+        System.out.println("______________________________");
+
+    }
+
     public String getPlayerName() {
         return playerName;
     }

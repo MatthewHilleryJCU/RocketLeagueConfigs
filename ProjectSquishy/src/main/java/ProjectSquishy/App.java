@@ -11,15 +11,10 @@ import ProjectSquishy.models.settings.ControlSettings;
 import ProjectSquishy.models.settings.DeadzoneSettings;
 import ProjectSquishy.utils.BannerPrinter;
 import ProjectSquishy.utils.IO.AccessResource;
-import ProjectSquishy.utils.IO.PlayerDataController;
 import ProjectSquishy.utils.parser.ParserController;
-import javafx.application.Application;
-import javafx.stage.Stage;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -27,12 +22,16 @@ import java.util.Scanner;
 
 public class App {
 
+    private final static String BANNER_FILE_NAME = "banner.txt";
+    private final static String WELCOME_STRING = "\n Welcome to ProjectSquishy! \n";
+    private final static String PERSISTENCE_UNIT_NAME = "sqlDBconnect";
+
+
     public static void main(String[] args) {
 
         BannerPrinter bannerPrinter = new BannerPrinter();
         HtmlParserFactory htmlParserFactory = new HtmlParserFactory();
         DataMapperFactory dataMapperFactory = new DataMapperFactory();
-        PlayerDataController playerDataController = new PlayerDataController();
         ParserController parserController = new ParserController(htmlParserFactory, dataMapperFactory);
         DaoController daoController = new DaoController();
         AccessResource accessResource = new AccessResource();
@@ -41,7 +40,7 @@ public class App {
 
 
         // Create Entity Manager Factory
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("sqlDBconnect");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 
         // Create Daos
         GenericDao<Player> playerDao = new GenericDao<>(emf, Player.class);
@@ -52,15 +51,13 @@ public class App {
         searchedPlayers = playerDao.getAll();
 
 
-
         // Create Banner
-        String bannerFileName = "banner.txt";
-        accessResource.printFile(accessResource.getFile(bannerFileName));
+        bannerPrinter.print(accessResource.getFile(BANNER_FILE_NAME));
 
 
         // User input
         Scanner s = new Scanner(System.in);
-        System.out.println("\n Welcome to ProjectSquishy! \n");
+        System.out.println(WELCOME_STRING);
 
         int pick = 0;
         while (pick != 9) {
@@ -73,21 +70,20 @@ public class App {
                     break;
                 case 2:
                     for (Player player : searchedPlayers) {
-                        playerDataController.printPlayer(player);
+                        player.print();
                     }
                     break;
                 case 3:
                     System.out.println("What player?");
                     String playerChoice = s.nextLine().toLowerCase();
                     for (Player player : searchedPlayers) {
-                        if (player.getPlayerName().toLowerCase().contains(playerChoice)){
-                           playerDataController.printPlayer(player);
+                        if (player.getPlayerName().toLowerCase().contains(playerChoice)) {
+                            player.print();
                         }
                     }
                     break;
                 case 4:
                     players = parserController.parsePlayerData();
-                    playerDataController.printAllPlayers(players);
                     daoController.addAllPlayers(players, playerDao, controlDao, cameraDao, deadzoneDao);
                     break;
                 case 9:
@@ -97,8 +93,7 @@ public class App {
             }
         }
 
-        // Close Entity Manager Factory
-        emf.close();
+
     }
 
     private static int printMenu(Scanner s) {
@@ -110,7 +105,7 @@ public class App {
         int choice = 0;
         try {
             choice = Integer.valueOf(s.nextLine());
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
         }
         return choice;
     }
