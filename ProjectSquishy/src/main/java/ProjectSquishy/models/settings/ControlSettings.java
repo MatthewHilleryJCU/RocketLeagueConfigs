@@ -181,18 +181,18 @@ public class ControlSettings implements Persistable<ControlSettings> {
 
     @Override
     public String toString() {
-        return "ControlSettings{" +
+        return "ControlSettings{\n" +
                 "controlSettingsId=" + controlSettingsId +
-                ", powerSlide='" + powerSlide + '\'' +
-                ", airRoll='" + airRoll + '\'' +
+                ",\n powerSlide='" + powerSlide + '\'' +
+                ",\n airRoll='" + airRoll + '\'' +
 //                ", airRollLeft='" + airRollLeft + '\'' +
 //                ", airRollRight='" + airRollRight + '\'' +
-                ", boost='" + boost + '\'' +
-                ", jump='" + jump + '\'' +
-                ", ballCam='" + ballCam + '\'' +
-                ", brake='" + brake + '\'' +
-                ", throttle='" + throttle + '\'' +
-                '}';
+                ",\n boost='" + boost + '\'' +
+                ",\n jump='" + jump + '\'' +
+                ",\n ballCam='" + ballCam + '\'' +
+                ",\n brake='" + brake + '\'' +
+                ",\n throttle='" + throttle + '\'' +
+                "}\n";
     }
 }
 
