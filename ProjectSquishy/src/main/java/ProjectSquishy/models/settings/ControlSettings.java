@@ -181,9 +181,8 @@ public class ControlSettings implements Persistable<ControlSettings> {
 
     @Override
     public String toString() {
-        return "ControlSettings{\n" +
-                "controlSettingsId=" + controlSettingsId +
-                ",\n powerSlide='" + powerSlide + '\'' +
+        return "ControlSettings{" +
+                "\n powerSlide='" + powerSlide + '\'' +
                 ",\n airRoll='" + airRoll + '\'' +
 //                ", airRollLeft='" + airRollLeft + '\'' +
 //                ", airRollRight='" + airRollRight + '\'' +

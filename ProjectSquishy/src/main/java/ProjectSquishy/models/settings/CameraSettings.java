@@ -164,9 +164,8 @@ public class CameraSettings implements Persistable<CameraSettings> {
 
     @Override
     public String toString() {
-        return "CameraSettings{\n" +
-                "cameraSettingId=" + cameraSettingsId +
-                ",\n cameraShake=" + cameraShake +
+        return "CameraSettings{" +
+                "\n cameraShake=" + cameraShake +
                 ",\n fov=" + fov +
                 ",\n distance=" + distance +
                 ",\n height=" + height +

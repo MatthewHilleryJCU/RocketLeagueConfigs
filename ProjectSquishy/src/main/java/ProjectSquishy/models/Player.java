@@ -135,13 +135,11 @@ public class Player implements Persistable<Player> {
 
     @Override
     public String toString() {
-        return "Player{\n" +
-                "id=" + playerId +
-                ",\n playerName='" + playerName + '\'' +
-                ",\n controlSettings=" + controlSettings.toString() +
-                ",\n cameraSettings=" + cameraSettings.toString() +
-                ",\n deadzoneSettings=" + deadzoneSettings.toString() +
-                "}\n";
+        return  playerName + "{" +
+                "\n" + controlSettings.toString() +
+                "\n" + cameraSettings.toString() +
+                "\n" + deadzoneSettings.toString() +
+                "}";
     }
 
 }

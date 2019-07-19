@@ -124,9 +124,8 @@ public class DeadzoneSettings implements Persistable<DeadzoneSettings> {
 
     @Override
     public String toString() {
-        return "DeadzoneSettings{\n" +
-                "id=" + deadzoneSettingsId +
-                ",\n deadzoneShape='" + deadzoneShape + '\'' +
+        return "DeadzoneSettings{" +
+                "\n deadzoneShape='" + deadzoneShape + '\'' +
                 ",\n deadzone=" + deadzone +
                 ",\n dodgeDeadzone=" + dodgeDeadzone +
                 ",\n aerialSensitivity=" + aerialSensitivity +
