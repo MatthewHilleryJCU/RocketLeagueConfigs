@@ -11,7 +11,7 @@ import ProjectSquishy.models.settings.ControlSettings;
 import ProjectSquishy.models.settings.DeadzoneSettings;
 import ProjectSquishy.utils.BannerPrinter;
 import ProjectSquishy.utils.IO.AccessResource;
-import ProjectSquishy.utils.parser.ParserController;
+import ProjectSquishy.utils.parser.HtmlParserController;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -24,7 +24,7 @@ public class App {
 
     private final static String BANNER_FILE_NAME = "banner.txt";
     private final static String WELCOME_STRING = "\n Welcome to ProjectSquishy! \n";
-    private final static String PERSISTENCE_UNIT_NAME = "sqlDBconnect";
+    private final static String PERSISTENCE_UNIT_NAME = "ProjectSquishyDBconnect";
 
 
     public static void main(String[] args) {
@@ -32,7 +32,7 @@ public class App {
         BannerPrinter bannerPrinter = new BannerPrinter();
         HtmlParserFactory htmlParserFactory = new HtmlParserFactory();
         DataMapperFactory dataMapperFactory = new DataMapperFactory();
-        ParserController parserController = new ParserController(htmlParserFactory, dataMapperFactory);
+        HtmlParserController htmlParserController = new HtmlParserController(htmlParserFactory, dataMapperFactory);
         DaoController daoController = new DaoController();
         AccessResource accessResource = new AccessResource();
         Map<String, Player> players;
@@ -83,7 +83,7 @@ public class App {
                     }
                     break;
                 case 4:
-                    players = parserController.parsePlayerData();
+                    players = htmlParserController.parsePlayerData();
                     daoController.addAllPlayers(players, playerDao, controlDao, cameraDao, deadzoneDao);
                     break;
                 case 9:

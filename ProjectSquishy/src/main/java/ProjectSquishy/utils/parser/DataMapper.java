@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class DataMapper {
 
-    private Logger logger = org.apache.log4j.Logger.getLogger(DataMapper.class);
+    private final Logger logger = Logger.getLogger(DataMapper.class);
     private StringFormatter stringFormatter = new StringFormatter();
     private ButtonChecker buttonChecker = new ButtonChecker();
 
@@ -79,9 +79,7 @@ public class DataMapper {
                 }
             }
 
-
             if (!(values.isEmpty())) {
-
                 settings.setPowerSlide(values.get(0));
                 settings.setAirRoll(values.get(1));
 //            settings.setAirRollLeft(values.get(4));

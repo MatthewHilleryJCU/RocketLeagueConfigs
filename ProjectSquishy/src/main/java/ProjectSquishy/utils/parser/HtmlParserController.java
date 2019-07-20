@@ -9,7 +9,7 @@ import org.jsoup.nodes.Document;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ParserController {
+public class HtmlParserController {
 
     private Map<String, Player> players = new HashMap<>();
     private HtmlParser parser;
@@ -19,7 +19,7 @@ public class ParserController {
     private static String controlUrl = "https://liquipedia.net/rocketleague/List_of_player_control_settings";
     private static String deadzoneUrl = "https://liquipedia.net/rocketleague/List_of_player_deadzone_settings";
 
-    public ParserController(HtmlParserFactory htmlParserFactory, DataMapperFactory dataMapperFactory) {
+    public HtmlParserController(HtmlParserFactory htmlParserFactory, DataMapperFactory dataMapperFactory) {
         this.parser = htmlParserFactory.create();
         this.mapper = dataMapperFactory.create();
     }

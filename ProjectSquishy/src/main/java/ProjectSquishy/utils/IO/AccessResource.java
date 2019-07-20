@@ -7,7 +7,7 @@ import java.net.URL;
 
 public class AccessResource {
 
-    private Logger logger = org.apache.log4j.Logger.getLogger(AccessResource.class);
+    private final Logger logger = Logger.getLogger(AccessResource.class);
 
     public File getFile(String fileName) {
         ClassLoader classLoader = getClass().getClassLoader();

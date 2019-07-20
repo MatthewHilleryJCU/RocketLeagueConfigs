@@ -16,8 +16,8 @@ public class Player implements Persistable<Player> {
 
     @Id
     @GeneratedValue(
-            strategy = GenerationType.AUTO,
-            generator = "native"
+            strategy = GenerationType.AUTO
+            , generator = "native"
     )
     @GenericGenerator(
             name = "native",
@@ -28,15 +28,15 @@ public class Player implements Persistable<Player> {
     @Column(name = "PLAYER_NAME")
     private String playerName;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CONTROL_SETTINGS_ID")
     private ControlSettings controlSettings;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CAMERA_SETTINGS_ID")
     private CameraSettings cameraSettings;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "DEADZONE_SETTINGS_ID")
     private DeadzoneSettings deadzoneSettings;
 
@@ -52,7 +52,7 @@ public class Player implements Persistable<Player> {
     }
 
     @Override
-    public long getControlSettingsId() {
+    public long getId() {
         return playerId;
     }
 
@@ -70,20 +70,20 @@ public class Player implements Persistable<Player> {
         if (getDeadzoneSettings() != null) {
             System.out.println(getDeadzoneSettings().toString());
         } else {
-            System.out.println("No deadzone data! ");
+            System.out.println("No deadzone data! \n");
         }
         if (getCameraSettings() != null) {
             System.out.println(getCameraSettings().toString());
         } else {
-            System.out.println("No camera settings data!");
+            System.out.println("No camera settings data!\n");
         }
 
         if (getControlSettings() != null) {
             System.out.println(getControlSettings().toString());
         } else {
-            System.out.println("No controls settings data!");
+            System.out.println("No controls settings data!\n");
         }
-        System.out.println("______________________________");
+        System.out.println("______________________________\n");
 
     }
 
@@ -141,5 +141,4 @@ public class Player implements Persistable<Player> {
                 "\n" + deadzoneSettings.toString() +
                 "}";
     }
-
 }

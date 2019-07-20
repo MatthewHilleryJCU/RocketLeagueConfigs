@@ -12,7 +12,7 @@ import java.io.Reader;
 
 public class JsonReader {
 
-    private Logger logger = Logger.getLogger(JsonReader.class);
+    private final Logger logger = Logger.getLogger(JsonReader.class);
 
     public JSONObject readJson(String filename) {
 

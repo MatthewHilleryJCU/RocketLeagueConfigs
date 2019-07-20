@@ -5,14 +5,19 @@ import ProjectSquishy.models.Player;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "CONTROL_SETTINGS")
 public class ControlSettings implements Persistable<ControlSettings> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GeneratedValue(strategy = GenerationType.AUTO
+            , generator = "native"
+    )
     @GenericGenerator(name = "native", strategy = "native")
     private long controlSettingsId;
 
@@ -43,16 +48,13 @@ public class ControlSettings implements Persistable<ControlSettings> {
     @Column(name = "THROTTLE")
     private String throttle;
 
-    @OneToOne(mappedBy = "controlSettings")
-    private Player player;
+    @OneToMany(mappedBy = "controlSettings")
+    private List<Player> players = new ArrayList<>();
 
     public ControlSettings() {
     }
 
-    @Override
-    public long getControlSettingsId() {
-        return controlSettingsId;
-    }
+
 
     public ControlSettings( String powerSlide, String airRoll,
 //                           String airRollLeft, String airRollRight,
@@ -81,6 +83,19 @@ public class ControlSettings implements Persistable<ControlSettings> {
             brake = updateType.brake;
             throttle = updateType.throttle;
         }
+    }
+
+    @Override
+    public long getId() {
+        return controlSettingsId;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 
     public String getPowerSlide() {
@@ -160,8 +175,7 @@ public class ControlSettings implements Persistable<ControlSettings> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ControlSettings that = (ControlSettings) o;
-        return controlSettingsId == that.controlSettingsId &&
-                Objects.equals(powerSlide, that.powerSlide) &&
+        return Objects.equals(powerSlide, that.powerSlide) &&
                 Objects.equals(airRoll, that.airRoll) &&
 //                Objects.equals(airRollLeft, that.airRollLeft) &&
 //                Objects.equals(airRollRight, that.airRollRight) &&
@@ -174,7 +188,7 @@ public class ControlSettings implements Persistable<ControlSettings> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(controlSettingsId, powerSlide, airRoll,
+        return Objects.hash(powerSlide, airRoll,
 //                airRollLeft, airRollRight,
                 boost, jump, ballCam, brake, throttle);
     }
