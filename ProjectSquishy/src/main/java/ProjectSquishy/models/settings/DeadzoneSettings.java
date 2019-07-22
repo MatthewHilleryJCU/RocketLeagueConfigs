@@ -18,19 +18,19 @@ public class DeadzoneSettings implements Persistable<DeadzoneSettings> {
     @GenericGenerator(name = "native", strategy = "native")
     private long deadzoneSettingsId;
 
-    @Column(name = "DEADZONE_SHAPE")
+    @Column(name = "DEADZONE_SHAPE", columnDefinition = "varchar(255) default Square")
     private String deadzoneShape;
 
-    @Column(name = "DEADZONE")
+    @Column(name = "DEADZONE", columnDefinition = "double default .3")
     private double deadzone;
 
-    @Column(name = "DODGE_DEADZONE")
+    @Column(name = "DODGE_DEADZONE", columnDefinition = "double default .5")
     private double dodgeDeadzone;
 
-    @Column(name = "AERIAL_SENSITIVITY")
+    @Column(name = "AERIAL_SENSITIVITY", columnDefinition = "double default 1")
     private double aerialSensitivity;
 
-    @Column(name = "STEERING_SENSITIVITY")
+    @Column(name = "STEERING_SENSITIVITY", columnDefinition = "double default `")
     private double steeringSensitivity;
 
     @OneToOne(mappedBy = "deadzoneSettings")

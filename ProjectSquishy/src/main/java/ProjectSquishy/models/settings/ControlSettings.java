@@ -16,10 +16,10 @@ public class ControlSettings implements Persistable<ControlSettings> {
     @GenericGenerator(name = "native", strategy = "native")
     private long controlSettingsId;
 
-    @Column(name = "POWER_SLIDE")
+    @Column(name = "POWER_SLIDE", columnDefinition =" varchar(255) default square")
     private String powerSlide;
 
-    @Column(name = "AIR_ROLL")
+    @Column(name = "AIR_ROLL", columnDefinition = "varchar(255) default square")
     private String airRoll;
 
 //    @Column(name = "AIR_ROLL_LEFT")
@@ -28,19 +28,19 @@ public class ControlSettings implements Persistable<ControlSettings> {
 ////    @Column(name = "AIR_ROLL_RIGHT")
 ////    private String airRollRight;
 
-    @Column(name = "BOOST")
+    @Column(name = "BOOST", columnDefinition = "varchar(255) default circle")
     private String boost;
 
-    @Column(name = "JUMP")
+    @Column(name = "JUMP", columnDefinition = "varchar(255) default cross")
     private String jump;
 
-    @Column(name = "BALL_CAM")
+    @Column(name = "BALL_CAM", columnDefinition = "varchar(255) default triangle")
     private String ballCam;
 
-    @Column(name = "BRAKE")
+    @Column(name = "BRAKE", columnDefinition = "varchar(255) default L1")
     private String brake;
 
-    @Column(name = "THROTTLE")
+    @Column(name = "THROTTLE", columnDefinition = "varchar(255) default R1")
     private String throttle;
 
     @OneToOne(mappedBy = "controlSettings")

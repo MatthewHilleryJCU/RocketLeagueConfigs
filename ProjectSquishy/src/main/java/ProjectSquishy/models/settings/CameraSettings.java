@@ -15,29 +15,29 @@ public class CameraSettings implements Persistable<CameraSettings> {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private long cameraSettingsId;
-
-    @Column(name = "CAMERA_SHAKE")
+//default for camera shake is selected, (1)
+    @Column(name = "CAMERA_SHAKE", columnDefinition = "bit(1) default 1" )
     private boolean cameraShake;
 
-    @Column(name = "FOV")
+    @Column(name = "FOV", columnDefinition = "bigint(20 default 90")
     private long fov;
 
-    @Column(name = "DISTANCE")
+    @Column(name = "DISTANCE", columnDefinition = "bigint(2) default 260")
     private long distance;
 
-    @Column(name = "HEIGHT")
+    @Column(name = "HEIGHT", columnDefinition = "bigint(20) default 100")
     private long height;
 
-    @Column(name = "ANGLE")
+    @Column(name = "ANGLE", columnDefinition = "double default -3")
     private double angle;
 
-    @Column(name = "STIFFNESS")
+    @Column(name = "STIFFNESS", columnDefinition = "double default .3")
     private double stiffness;
 
-    @Column(name = "SWIVEL")
+    @Column(name = "SWIVEL", columnDefinition = "double default 2.5")
     private double swivel;
-
-    @Column(name = "BALLCAM")
+// Default for ball cam is toggle (1)
+    @Column(name = "BALLCAM", columnDefinition = "bit(1) default 1")
     private boolean ballCam;
 
     @OneToOne(mappedBy = "cameraSettings")
