@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class HtmlParser {
 
-    private Logger logger = Logger.getLogger(HtmlParser.class);
+    private final Logger logger = Logger.getLogger(HtmlParser.class);
 
     public Document parse (String url){
 

@@ -16,8 +16,8 @@ public class Player implements Persistable<Player> {
 
     @Id
     @GeneratedValue(
-            strategy = GenerationType.AUTO,
-            generator = "native"
+            strategy = GenerationType.AUTO
+            , generator = "native"
     )
     @GenericGenerator(
             name = "native",
@@ -28,15 +28,15 @@ public class Player implements Persistable<Player> {
     @Column(name = "PLAYER_NAME")
     private String playerName;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CONTROL_SETTINGS_ID")
     private ControlSettings controlSettings;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CAMERA_SETTINGS_ID")
     private CameraSettings cameraSettings;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "DEADZONE_SETTINGS_ID")
     private DeadzoneSettings deadzoneSettings;
 
@@ -52,7 +52,7 @@ public class Player implements Persistable<Player> {
     }
 
     @Override
-    public long getControlSettingsId() {
+    public long getId() {
         return playerId;
     }
 
@@ -63,6 +63,28 @@ public class Player implements Persistable<Player> {
             cameraSettings = updateType.cameraSettings;
             deadzoneSettings = updateType.deadzoneSettings;
         }
+    }
+
+    public void print() {
+        System.out.println(getPlayerName());
+        if (getDeadzoneSettings() != null) {
+            System.out.println(getDeadzoneSettings().toString());
+        } else {
+            System.out.println("No deadzone data! \n");
+        }
+        if (getCameraSettings() != null) {
+            System.out.println(getCameraSettings().toString());
+        } else {
+            System.out.println("No camera settings data!\n");
+        }
+
+        if (getControlSettings() != null) {
+            System.out.println(getControlSettings().toString());
+        } else {
+            System.out.println("No controls settings data!\n");
+        }
+        System.out.println("______________________________\n");
+
     }
 
     public String getPlayerName() {
@@ -113,12 +135,10 @@ public class Player implements Persistable<Player> {
 
     @Override
     public String toString() {
-        return "Player{" +
-                "id=" + playerId +
-                ", playerName='" + playerName + '\'' +
-                ", controlSettings=" + controlSettings.toString() +
-                ", cameraSettings=" + cameraSettings.toString() +
-                ", deadzoneSettings=" + deadzoneSettings.toString() +
-                '}';
+        return  playerName + "{" +
+                "\n" + controlSettings.toString() +
+                "\n" + cameraSettings.toString() +
+                "\n" + deadzoneSettings.toString() +
+                "}";
     }
 }

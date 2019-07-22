@@ -24,7 +24,7 @@ public class ButtonChecker {
     private static final String PS4L2 = "/commons/images/9/97/PlayStation_button_L2.svg";
     private static final String PS4L3 = "/commons/images/4/48/PlayStation_button_L3.svg";
 
-    private Logger logger = org.apache.log4j.Logger.getLogger(ButtonChecker.class);
+    private final Logger logger = Logger.getLogger(ButtonChecker.class);
 
 
     public String checkButton(String buttonSource) {

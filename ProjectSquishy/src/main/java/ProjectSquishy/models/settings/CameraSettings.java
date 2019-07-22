@@ -5,14 +5,19 @@ import ProjectSquishy.models.Player;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "CAMERA_SETTINGS")
 public class CameraSettings implements Persistable<CameraSettings> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GeneratedValue(strategy = GenerationType.AUTO
+            , generator = "native"
+    )
     @GenericGenerator(name = "native", strategy = "native")
     private long cameraSettingsId;
 
@@ -40,8 +45,9 @@ public class CameraSettings implements Persistable<CameraSettings> {
     @Column(name = "BALLCAM")
     private boolean ballCam;
 
-    @OneToOne(mappedBy = "cameraSettings")
-    private Player player;
+
+    @OneToMany(mappedBy = "cameraSettings")
+    private List<Player> players = new ArrayList<>();
 
 
     public CameraSettings() {
@@ -58,10 +64,6 @@ public class CameraSettings implements Persistable<CameraSettings> {
         this.ballCam = ballCam;
     }
 
-    @Override
-    public long getControlSettingsId() {
-        return cameraSettingsId;
-    }
 
     @Override
     public void update(CameraSettings updateType) {
@@ -75,6 +77,18 @@ public class CameraSettings implements Persistable<CameraSettings> {
             swivel = updateType.swivel;
             ballCam = updateType.ballCam;
         }
+    }
+
+    @Override
+    public long getId() {
+        return cameraSettingsId;
+    }
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 
     public boolean isCameraShake() {
@@ -146,8 +160,7 @@ public class CameraSettings implements Persistable<CameraSettings> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CameraSettings that = (CameraSettings) o;
-        return cameraSettingsId == that.cameraSettingsId &&
-                cameraShake == that.cameraShake &&
+        return cameraShake == that.cameraShake &&
                 fov == that.fov &&
                 distance == that.distance &&
                 height == that.height &&
@@ -159,21 +172,20 @@ public class CameraSettings implements Persistable<CameraSettings> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(cameraSettingsId, cameraShake, fov, distance, height, angle, stiffness, swivel, ballCam);
+        return Objects.hash(cameraShake, fov, distance, height, angle, stiffness, swivel, ballCam);
     }
 
     @Override
     public String toString() {
         return "CameraSettings{" +
-                "cameraSettingId=" + cameraSettingsId +
-                ", cameraShake=" + cameraShake +
-                ", fov=" + fov +
-                ", distance=" + distance +
-                ", height=" + height +
-                ", angle=" + angle +
-                ", stiffness=" + stiffness +
-                ", swivel=" + swivel +
-                ", ballCam=" + ballCam +
-                '}';
+                "\n cameraShake=" + cameraShake +
+                ",\n fov=" + fov +
+                ",\n distance=" + distance +
+                ",\n height=" + height +
+                ",\n angle=" + angle +
+                ",\n stiffness=" + stiffness +
+                ",\n swivel=" + swivel +
+                ",\n ballCam=" + ballCam +
+                "}\n";
     }
 }

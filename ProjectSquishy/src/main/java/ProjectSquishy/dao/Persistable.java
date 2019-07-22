@@ -1,7 +1,7 @@
 package ProjectSquishy.dao;
 
 public interface Persistable<T> {
-	long getControlSettingsId();
+	long getId();
 	void update(T updateType);
 	
 }
